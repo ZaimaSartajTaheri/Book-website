@@ -1,6 +1,6 @@
 # Book-website
 
-How to use my Data:
+**How to use my Data:**
 
 1.After downloading the file, unzip the zip file and keep this folder on your computer's XAMPP folder's htdocs folder.
 
@@ -16,7 +16,7 @@ How to use my Data:
 
 7.Now open this link http://localhost/Book-website/index.php to see the output on your browser.
 
-Output Description:
+**Output Description:**
 
 1.Landing page has been designed as per instructions and also fully responsive for laptop and mobile screen.
 
