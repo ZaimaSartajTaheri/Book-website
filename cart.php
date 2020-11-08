@@ -454,7 +454,7 @@ AddToCart.addEventListener('click', function() {
                 xhr.setRequestHeader("Content-Type", "application/json");
                 xhr.send(cartJson);
                 const errorMessages = document.querySelectorAll(".errorMessages");
-                console.log(errorMessages);
+
                 errorMessages.forEach(function(errorMessage) {
                     errorMessage.style.display = "none";
                 });
