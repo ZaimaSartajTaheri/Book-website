@@ -1,11 +1,9 @@
 <?php
 include('includes/config.php');
-$quantity=0;
-$totalPrice=0;
-$deliveryCharge=0;
-$grossAmount=0;
+
 $requestPayload=file_get_contents("php://input");
 $object=json_decode($requestPayload,true);
+
 if($object!=NULL){
     var_dump($object);
     $productName=$object["productName"];
@@ -30,18 +28,18 @@ if($object!=NULL){
    
     mysqli_query($con,"INSERT INTO  orderdetails(productId,firstName,lastName,companyName,email,mobileNumber,zipCode,state,city,houseName,apartmentNum,productQuantity,price,deliveryFee,totalPrice,paymentOption) values('1','$firstName','$lastName','$companyName','$email','$mobileNumber','$zipCode','$state','$city','$houseName','$apartmentNum','$quantity','$totalPrice','$deliveryCharge','$grossAmount','$paymentMethod')");
 }
-
-
-
 ?>
+<!------------------------------------------------CART TABLE SECTION STARTS------------------------------------------------>
 <div class="container cart">
     <form name="item-count" class="form-inline item-input">
-        <input class="form-control item-count" type="text" name="product" required="required" value="5">
+        <input class="form-control item-count" type="text" name="product" required="required" placeholder="5" value="">
         <p class="item-count-label form-control my-2" type="submit" name="search">冊</p>
     </form>
+    <div class="errorMessages cartError"></div>
     <button class="pink-btn btn add-to-cart">カートに入れる</button>
 
     <h4 class="price">定価<span>1,500円</span>（税別）</h4>
+
     <div class="cart-table">
         <table>
             <caption class="table-caption">■ カート</caption>
@@ -65,9 +63,9 @@ if($object!=NULL){
                         <p class="ml-2 mt-3 book-name">デザイナーは多様力が9割</p>
                     </div>
                 </td>
-                <td rowspan="2"><span class="onebook-with-tax">1650</span>円</td>
+                <td rowspan="2"><span class="onebook-with-tax">1,650</span>円</td>
                 <td> <span class="table-quantity">5</span>冊</td>
-                <td><span class="Total-price">8250</span>円</td>
+                <td><span class="Total-price">8,250</span>円</td>
             </tr>
             <tr>
 
@@ -81,16 +79,16 @@ if($object!=NULL){
             <col style="width:50%">
             <tr>
                 <td>合計（税込）</td>
-                <td><span class="gross-amount">13250</span>円</td>
+                <td><span class="gross-amount">8,750</span>円</td>
             </tr>
         </table>
     </div>
 
 </div>
-<!-- customer details -->
+<!------------------------------------------------CART TABLE SECTION ENDS------------------------------------------------>
 
-<section class="container customer-details " data-aos="zoom-in" data-aos-offset="200" data-aos-delay="50"
-    data-aos-duration="1000">
+<!------------------------------------------------CUSTOMER DETAILS FORM SECTION STARTS------------------------------------------------>
+<section class="container customer-details">
     <div>
         <h3>■ 配送先住所</h3>
     </div>
@@ -98,7 +96,7 @@ if($object!=NULL){
         <form class="customer-form-details">
             <!-- role="form" method="post" -->
             <div class="success"></div>
-            <div class="error"></div>
+            <div class="errorMessages error"></div>
             <div class="input-group-sm">
                 <div class="row">
                     <div class="col-6">
@@ -111,7 +109,7 @@ if($object!=NULL){
                         <input type="text" class="form-control h-75 rounded firstName" name="firstName" placeholder="名">
 
                     </div>
-                    <div class="firstNameError"></div>
+                    <div class="errorMessages firstNameError"></div>
                 </div>
             </div>
             <div class=" input-group-sm">
@@ -121,7 +119,7 @@ if($object!=NULL){
                             placeholder="会社・団体名">
 
                     </div>
-                    <div class="companyNameError"></div>
+                    <div class="errorMessages companyNameError"></div>
 
                 </div>
             </div>
@@ -131,13 +129,13 @@ if($object!=NULL){
                         <input type="text" class="form-control h-75 rounded email" name="email" placeholder="e-mail">
 
                     </div>
-                    <div class="emailError"></div>
+                    <div class="errorMessages emailError"></div>
                     <div class="col-6">
                         <input type="text" class="form-control h-75 rounded mobileNumber" name="mobileNumber"
                             placeholder="電話番号">
 
                     </div>
-                    <div class="mobileNumberError"></div>
+                    <div class="errorMessages mobileNumberError"></div>
                 </div>
             </div>
             <div>
@@ -154,13 +152,13 @@ if($object!=NULL){
                         <input type="text" class="form-control h-75 rounded state" name="state" placeholder="住所/都道府県">
 
                     </div>
-                    <div class="stateError"></div>
+                    <div class="errorMessages stateError"></div>
 
                     <div class="col-6">
                         <input type="text" class="form-control h-75 rounded city" name="city" placeholder="市区町村">
 
                     </div>
-                    <div class="cityError"></div>
+                    <div class="errorMessages cityError"></div>
 
                 </div>
             </div>
@@ -171,7 +169,7 @@ if($object!=NULL){
                             placeholder="番地">
 
                     </div>
-                    <div class="houseNameError"></div>
+                    <div class="errorMessages houseNameError"></div>
 
                     <div class="col-6">
                         <input type="text" class="form-control h-75 rounded apartmentNum" name="apartmentNum"
@@ -198,18 +196,20 @@ if($object!=NULL){
                                     </label>
                                 </div>
                             </div>
-                            <div class="paymentError"></div>
+                            <div class="errorMessages paymentError"></div>
                         </div>
                     </div>
                 </div>
                 <div class="submit-btn-content">
-                    <button type="submit" name="submit" class="btn submit-btn">決済へ進む</button>
+                    <button type="submit" name="submit" class="btn buyBtn submit-btn">決済へ進む</button>
                 </div>
             </div>
         </form>
     </div>
 </section>
-<!-- bank tranfer -->
+<!------------------------------------------------CUSTOMER DETAILS FORM SECTION ENDS------------------------------------------------>
+
+<!-------------------------------------------BANK TRANSFER DESCRIPTION SECTION STARTS------------------------------------------------>
 <div class="bank-transfer-description container" data-aos="slide-up" data-aos-offset="200" data-aos-delay="50"
     data-aos-duration="1000">
     <h3 class="text-center">ご注文頂きまして誠にありがとうございます！</h3>
@@ -285,16 +285,17 @@ if($object!=NULL){
 
 
 </div>
+<!-------------------------------------------BANK TRANSFER DESCRIPTION SECTION STARTS------------------------------------------------>
+
+
 <script type="text/javascript">
 const AddToCart = document.querySelector('.add-to-cart');
 const buyBtn = document.querySelector('.submit-btn');
 const bankTransferDescription = document.querySelector('.bank-transfer-description');
-
 const bankTransfer = document.querySelector('#radio1');
 const creditCard = document.querySelector('#radio2');
 
 const cart = {};
-
 
 bankTransferDescription.style.display = "none";
 
@@ -308,150 +309,175 @@ creditCard.addEventListener('click', function() {
 
 AddToCart.addEventListener('click', function() {
 
-    const quantity = document.querySelector('.item-count').value;
-    document.querySelector(".table-quantity").innerHTML = quantity;
-    const oneBookWithTax = 1500 + 1500 * .1;
-    const totalPrice = oneBookWithTax * quantity;
-    document.querySelector(".onebook-with-tax").innerHTML = oneBookWithTax;
-    document.querySelector(".Total-price").innerHTML = totalPrice;
-    const deliveryCharge = 500;
-    document.querySelector(".delivery-charge").innerHTML = deliveryCharge;
-    const grossAmount = totalPrice + deliveryCharge;
-    // console.log(grossAmount);
-    document.querySelector(".gross-amount").innerHTML = grossAmount;
+    function thousands_separators(num) {
+        var num_parts = num.toString().split(".");
+        num_parts[0] = num_parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        return num_parts.join(".");
+    }
 
-    cart.productName = document.querySelector(".book-name").innerHTML;
-    cart.productImage = document.querySelector(".cart-img").src;
-    cart.singleProductPrice = "1500";
-    cart.singleProductPriceWithTax = oneBookWithTax;
-    cart.quantity = quantity;
-    cart.totalPrice = totalPrice;
-    cart.deliveryCharge = deliveryCharge;
-    cart.grossAmount = grossAmount;
-    buyBtn.addEventListener('click', function(e) {
-        e.preventDefault();
-        const lastName = document.querySelector(".lastName").value;
-        const firstName = document.querySelector(".firstName").value;
-        const companyName = document.querySelector(".companyName").value;
-        const email = document.querySelector(".email").value;
-        const mobileNumber = document.querySelector(".mobileNumber").value;
-        const zipCode = document.querySelector(".zipCode").value;
-        const state = document.querySelector(".state").value;
-        const city = document.querySelector(".city").value;
-        const houseName = document.querySelector(".houseName").value;
-        const apartmentNum = document.querySelector(".apartmentNum").value;
-        const paymentOptions = document.querySelectorAll('input[name="payment"]');
-        let selectedValue;
-        for (const paymentOption of paymentOptions) {
-            if (paymentOption.checked) {
-                selectedValue = paymentOption.value;
-                break;
+    function isEmail(email) {
+        return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+            .test(email);
+    }
+
+    if (document.querySelector('.item-count').value != "") {
+
+        const quantity = document.querySelector('.item-count').value;
+        document.querySelector(".table-quantity").innerHTML = quantity;
+        const oneBookWithTax = 1500 + 1500 * .1;
+        const oneBookWithTaxWithComma = thousands_separators(Math.round(oneBookWithTax));
+        const totalPrice = oneBookWithTax * quantity;
+        const totalPriceWithComma = thousands_separators(Math.round(totalPrice));
+        document.querySelector(".onebook-with-tax").innerHTML = oneBookWithTaxWithComma;
+        document.querySelector(".Total-price").innerHTML = totalPriceWithComma;
+        const deliveryCharge = 500;
+        document.querySelector(".delivery-charge").innerHTML = deliveryCharge;
+        const grossAmount = totalPrice + deliveryCharge;
+        const grossAmountWithComma = thousands_separators(Math.round(grossAmount));
+        document.querySelector(".gross-amount").innerHTML = grossAmountWithComma;
+
+        cart.productName = document.querySelector(".book-name").innerHTML;
+        cart.productImage = document.querySelector(".cart-img").src;
+        cart.singleProductPrice = "1500";
+        cart.singleProductPriceWithTax = oneBookWithTax;
+        cart.quantity = quantity;
+        cart.totalPrice = totalPrice;
+        cart.deliveryCharge = deliveryCharge;
+        cart.grossAmount = grossAmount;
+
+        buyBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            const lastName = document.querySelector(".lastName").value;
+            const firstName = document.querySelector(".firstName").value;
+            const companyName = document.querySelector(".companyName").value;
+            const email = document.querySelector(".email").value;
+            const mobileNumber = document.querySelector(".mobileNumber").value;
+            const zipCode = document.querySelector(".zipCode").value;
+            const state = document.querySelector(".state").value;
+            const city = document.querySelector(".city").value;
+            const houseName = document.querySelector(".houseName").value;
+            const apartmentNum = document.querySelector(".apartmentNum").value;
+            const paymentOptions = document.querySelectorAll('input[name="payment"]');
+            let selectedValue;
+            for (const paymentOption of paymentOptions) {
+                if (paymentOption.checked) {
+                    selectedValue = paymentOption.value;
+                    break;
+                }
+
             }
 
-        }
+            cart.lastName = lastName;
+            if (firstName != "") {
+                cart.firstName = firstName;
+            } else {
 
-        function isEmail(email) {
-            return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-                .test(email);
-        }
-        cart.lastName = lastName;
-        if (firstName != "") {
+                document.querySelector(".firstNameError").innerHTML =
+                    `<div class="alert alert-danger alert-dismissible fade show" role="alert"><strong>Please Enter your Name</strong><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>`;
 
-            cart.firstName = firstName;
-        } else {
+            }
 
-            document.querySelector(".firstNameError").innerHTML =
-                `<div class="alert alert-danger alert-dismissible fade show" role="alert"><strong>Please Enter your Name</strong><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>`;
-
-        }
-
-        cart.companyName = companyName;
+            cart.companyName = companyName;
 
 
-        if (email != "") {
-            if (isEmail(email)) {
-                cart.email = email;
+            if (email != "") {
+                if (isEmail(email)) {
+                    cart.email = email;
+                } else {
+                    document.querySelector(".emailError").innerHTML =
+                        '<div class="alert alert-danger alert-dismissible fade show" role="alert"><strong>Please Enter a valid email address</strong><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>';
+                }
+
+
             } else {
                 document.querySelector(".emailError").innerHTML =
-                    '<div class="alert alert-danger alert-dismissible fade show" role="alert"><strong>Please Enter a valid email address</strong><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>';
+                    '<div class="alert alert-danger alert-dismissible fade show" role="alert"><strong>Please Enter an email address</strong><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>';
+
+            }
+            if (mobileNumber != "") {
+                cart.mobileNumber = mobileNumber;
+            } else {
+
+                document.querySelector(".mobileNumberError").innerHTML =
+                    '<div class="alert alert-danger alert-dismissible fade show" role="alert"><strong>Please Enter a Mobile Number</strong><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>';
+
+            }
+
+            cart.zipCode = zipCode;
+            if (state != "") {
+                cart.state = state;
+            } else {
+
+                document.querySelector(".stateError").innerHTML =
+                    '<div class="alert alert-danger alert-dismissible fade show" role="alert"><strong>Please Enter a State</strong><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>';
+
+            }
+            if (city != "") {
+                cart.city = city;
+            } else {
+
+                document.querySelector(".cityError").innerHTML =
+                    '<div class="alert alert-danger alert-dismissible fade show" role="alert"><strong>Please Enter a City</strong><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>';
+
             }
 
 
-        } else {
+            if (houseName != "") {
+                cart.houseName = houseName;
+            } else {
+
+                document.querySelector(".houseNameError").innerHTML =
+                    '<div class="alert alert-danger alert-dismissible fade show" role="alert"><strong>Please Enter Your House Name</strong><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>';
+
+            }
+
+            cart.apartmentNum = apartmentNum;
+            if (selectedValue != undefined) {
+                cart.paymentOption = selectedValue;
+            } else {
+
+                document.querySelector(".paymentError").innerHTML =
+                    '<div class="alert alert-danger alert-dismissible fade show" role="alert"><strong>Please Select any Payment Option</strong><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>';
+
+            }
 
 
-            document.querySelector(".emailError").innerHTML =
-                '<div class="alert alert-danger alert-dismissible fade show" role="alert"><strong>Please Enter an email address</strong><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>';
+            cartJson = JSON.stringify(cart);
 
-        }
-        if (mobileNumber != "") {
-            cart.mobileNumber = mobileNumber;
-        } else {
+            if (cart.email != undefined && cart.firstName != undefined && cart.mobileNumber !=
+                undefined &&
+                cart.state != undefined &&
+                cart.city != undefined && cart.houseName != undefined && cart.paymentOption != undefined
+            ) {
+                const xhr = new XMLHttpRequest();
+                xhr.open("POST", "cart.php");
+                xhr.setRequestHeader("Content-Type", "application/json");
+                xhr.send(cartJson);
+                const errorMessages = document.querySelectorAll(".errorMessages");
+                console.log(errorMessages);
+                errorMessages.forEach(function(errorMessage) {
+                    errorMessage.style.display = "none";
+                });
 
-            document.querySelector(".mobileNumberError").innerHTML =
-                '<div class="alert alert-danger alert-dismissible fade show" role="alert"><strong>Please Enter a Mobile Number</strong><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>';
+                document.querySelector(".success").innerHTML =
+                    '<div class="alert  alert-success alert-dismissible fade show" role="alert"><strong>Your order has been placed successfully</strong><button type="button" class="close successTextBtn" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>';
 
-        }
+            } else {
 
-        cart.zipCode = zipCode;
-        if (state != "") {
-            cart.state = state;
-        } else {
+                document.querySelector(".error").innerHTML =
+                    '<div class="alert alert-danger alert-dismissible fade show" role="alert"><strong>Sorry! There has been a problem</strong><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>';
 
-            document.querySelector(".stateError").innerHTML =
-                '<div class="alert alert-danger alert-dismissible fade show" role="alert"><strong>Please Enter a State</strong><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>';
+            }
 
-        }
-        if (city != "") {
-            cart.city = city;
-        } else {
+        });
 
-            document.querySelector(".cityError").innerHTML =
-                '<div class="alert alert-danger alert-dismissible fade show" role="alert"><strong>Please Enter a City</strong><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>';
-
-        }
-
-
-        if (houseName != "") {
-            cart.houseName = houseName;
-        } else {
-
-            document.querySelector(".houseNameError").innerHTML =
-                '<div class="alert alert-danger alert-dismissible fade show" role="alert"><strong>Please Enter Your House Name</strong><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>';
-
-        }
-
-        cart.apartmentNum = apartmentNum;
-        if (selectedValue != undefined) {
-            cart.paymentOption = selectedValue;
-        } else {
-
-            document.querySelector(".paymentError").innerHTML =
-                '<div class="alert alert-danger alert-dismissible fade show" role="alert"><strong>Please Select any Payment Option</strong><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>';
-
-        }
+    } else {
+        document.querySelector(".cartError").innerHTML =
+            `<div class="alert alert-danger alert-dismissible fade show" role="alert"><strong>Please Enter Book Quantity</strong><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>`;
+    }
 
 
-        cartJson = JSON.stringify(cart);
 
-        if (cart.email != undefined && cart.firstName != undefined && cart.mobileNumber != undefined &&
-            cart.state != undefined &&
-            cart.city != undefined && cart.houseName != undefined && cart.paymentOption != undefined) {
-            const xhr = new XMLHttpRequest();
-            xhr.open("POST", "cart.php");
-            xhr.setRequestHeader("Content-Type", "application/json");
-            xhr.send(cartJson);
-            document.querySelector(".success").innerHTML =
-                '<div class="alert alert-success alert-dismissible fade show" role="alert"><strong>Your order has been placed successfully</strong><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>';
-
-        } else {
-
-            document.querySelector(".error").innerHTML =
-                '<div class="alert alert-danger alert-dismissible fade show" role="alert"><strong>Sorry! There has been a problem</strong><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>';
-
-        }
-
-    });
 
 
 

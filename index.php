@@ -1,34 +1,36 @@
-<?php 
-include('includes/config.php');
-
-?>
-
 <!DOCTYPE html>
 <html lang="jp">
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=x-euc">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <!-- BOOTSTRAP LINK -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- AOS LINK -->
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-    <title>Document</title>
+
+    <title>Web Developer Task</title>
+    <!--CSS LINK -->
     <link rel="stylesheet" href="style.css">
     <script src="https://use.fontawesome.com/c6b0374cee.js"></script>
-
 </head>
 
 <body>
+    <!---------------------------------------------------NAVBAR STARTS------------------------------------------------------------------->
     <nav class="navbar navbar-expand-lg navbar-light">
+
         <a class="navbar-brand" href="#"><img class="logo" src="./images/logo.png" alt="" /></a>
+
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
             aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
         <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+
             <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+
                 <li class="nav-item active" data-aos="zoom-in" data-aos-offset="200" data-aos-delay="50"
                     data-aos-duration="1500">
                     <a class="nav-link" href="#"><i class="fa fa-facebook-official facebookIcon"
@@ -42,27 +44,42 @@ include('includes/config.php');
                     data-aos-duration="1500">
                     <a class="nav-link" href="#"><i class="fa fa-instagram instagramIcon" aria-hidden="true"></i></a>
                 </li>
+
             </ul>
+
+
         </div>
+
     </nav>
+    <!---------------------------------------------------NAVBAR ENDS------------------------------------------------------------------->
+
+    <!------------------------------------------------INTRODUCTION SEARCH BOX SECTION STARTS---------------------------------------------->
     <section class="d-flex">
 
         <textarea class="search-box"></textarea>
+
         <div class="introduction">
+
             <img id="searchIcon" src="./images/searchIcon.png" alt="">
-
-
             <p id="description">好奇心旺盛なデザイナー最強説を説く女性社長が教える
                 世界一たのしくてちょっぴり厳しい仕事論</p>
         </div>
 
     </section>
+    <!------------------------------------------------INTRODUCTION SEARCH BOX SECTION ENDS---------------------------------------------->
+
+    <!------------------------------------------------PINK BANNER SECTION STARTS---------------------------------------------------------->
     <section class="pink-banner">
+
         <div data-aos="zoom-in" data-aos-offset="200" data-aos-delay="50" data-aos-duration="1500">
             <p class="banner-text small-text">デザイナーは</p>
             <p class="banner-text large-text">多様力が9割</p>
         </div>
+
     </section>
+    <!------------------------------------------------PINK BANNER SECTION ENDS---------------------------------------------------------->
+
+    <!------------------------------------------------PEN & VERTICAL TEXT SECTION STARTS------------------------------------------------>
     <section class="pen-section">
         <div class="d-flex container">
             <img class="vertical-text" src="./images/verticalText.png" alt="">
@@ -78,6 +95,9 @@ include('includes/config.php');
         </div>
 
     </section>
+    <!------------------------------------------------PEN & VERTICAL TEXT SECTION ENDS------------------------------------------------>
+
+    <!------------------------------------------------TEXT BOARD WITH MAN SECTION STARTS------------------------------------------------>
     <section>
         <div class="container text-board" data-aos="zoom-in" data-aos-offset="200" data-aos-delay="25"
             data-aos-duration="1000">
@@ -107,6 +127,9 @@ include('includes/config.php');
 
         </div>
     </section>
+    <!------------------------------------------------TEXT BOARD WITH MAN SECTION ENDS------------------------------------------------>
+
+    <!------------------------------------------------ABOUT THE BOOK SECTION STARTS------------------------------------------------>
     <section class="about-the-book" data-aos="fade-up" data-aos-offset="300" data-aos-delay="20"
         data-aos-duration="1000">
         <div class="about-book-banner">
@@ -177,9 +200,11 @@ include('includes/config.php');
 
 
     </section>
+    <!------------------------------------------------ABOUT THE BOOK SECTION ENDS------------------------------------------------>
+
 
     <section class="about-the-author">
-
+        <!------------------------------------------------ABOUT THE AUTHOR SECTION STARTS------------------------------------------------>
         <div class="banner">
             <h1>About the Author<span><img src="./images/style-line2.png"> </span></h1>
         </div>
@@ -240,6 +265,9 @@ include('includes/config.php');
             </div>
 
         </div>
+        <!------------------------------------------------ABOUT THE AUTHOR SECTION ENDS------------------------------------------------>
+
+        <!------------------------------------------------PEOPLE RECOMMENDED SECTION STARTS------------------------------------------------>
         <div class="user">
             <div class="user-banner">
                 <h1>こんな方にオススメ<span><img src="./images/style-line2.png"> </span></h1>
@@ -313,14 +341,16 @@ include('includes/config.php');
                     </table>
                 </div>
             </div>
-
+            <!------------------------------------------------PEOPLE RECOMMENDED SECTION ENDS------------------------------------------------>
 
     </section>
-
+    <!------------------------------------------------CART SECTION STARTS------------------------------------------------>
     <section class="cart">
         <?php include('cart.php');?>
     </section>
+    <!------------------------------------------------CART SECTION ENDS------------------------------------------------>
 
+    <!------------------------------------------------PINK FOOTER STARTS------------------------------------------------>
     <section class="footer">
 
         <div class="container footer-container ">
@@ -415,14 +445,11 @@ include('includes/config.php');
 
         </div>
     </section>
-
+    <!------------------------------------------------PINK FOOTER ENDS------------------------------------------------>
 
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"
         integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-    <!-- <script src=" https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
-    </script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
         integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
     </script>
@@ -431,24 +458,22 @@ include('includes/config.php');
     </script>
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
 
-    
+
     <script>
     AOS.init();
     </script>
 </body>
+<!------------------------------------------------FOOTER COPYRIGHT TEXT STARTS------------------------------------------------>
 <footer class="text-center mt-3">
     <p>Copyright © Sugartaste Corporation.ltd. All rights reserved.</p>
     <div class="footer-icon mt-2 ">
 
         <a class="icon mr-2" href="#"><i class="fa fa-facebook-official facebookIcon" aria-hidden="true"></i></a>
-
-
         <a class="icon mr-2" href="#"><i class="fa fa-twitter-square twitterIcon" aria-hidden="true"></i></a>
-
-
         <a class="icon" href="#"><i class="fa fa-instagram instagramIcon" aria-hidden="true"></i></a>
 
     </div>
 </footer>
+<!------------------------------------------------FOOTER COPYRIGHT TEXT ENDS------------------------------------------------>
 
 </html>
